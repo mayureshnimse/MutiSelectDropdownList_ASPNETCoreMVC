@@ -1,0 +1,40 @@
+﻿@model StudentDto
+@{
+    ViewData["Title"] = "AddStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1> @(Model.Id>0?"Edit Student": "Add Student")</h1>
+<div class="container-fluid">
+    <form method="post" asp-action="AddStudent" asp-controller="Main">
+        <div class="form-group row">
+            @Html.HiddenFor(model => model.Id)
+            @Html.LabelFor(model => model.Name, new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-6">
+                @Html.TextAreaFor(model => model.Name, new { @class = "form-control", placeholder = "Enter Name"})
+            </div>
+        </div>
+
+        <div class="form-group-row">
+            @Html.LabelFor(model => model.CourseIds, new { @class ="col-sm-2 col-form-label"})
+            <div class="col-sm-6">
+                @Html.ListBoxFor(model => model.CourseIds, new MultiSelectList(Model.drpCourses, "Value", "Text"), new { @class ="form-control", multiple = "multiple", id = "Courses_dropdown"})
+            </div>
+        </div>
+
+
+        <div class="form-group-row">
+            <input type="submit" name="name" value="@(Model.Id>0?"Update": "Add")" class="btn btn-success" />
+
+        </div>
+
+    </form>
+
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function(){
+            $('#Courses_dropdown').multiselect();
+        });
+    </script>
+}

@@ -1,0 +1,27 @@
+﻿@model List<Student>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1> Student's List</h1>
+<a href="Main/AddStudent" class="btn btn-primary">Add Student<i class="fa fa-plus"></i></a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr><td>Name</td><td>Action</td></tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td><a href="Main/AddStudent/@item.Id" class="btn btn-warning">Edit Student <i class="fa fa-edit"></i></a></td>
+                </tr>    
+            }
+        }
+    </tbody>
+
+</table>
